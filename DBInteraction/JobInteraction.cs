@@ -37,7 +37,7 @@ namespace DBInteraction
         /// <summary>
         /// Set Job to Dist
         /// </summary>
-        /// <param name="pk">pk of Job</param>
+        /// <param name="job">Job to distribute</param>
         public static void PutDist(Job job)
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
@@ -49,9 +49,23 @@ namespace DBInteraction
         }
 
         /// <summary>
+        /// Reset job status
+        /// </summary>
+        /// <param name="job">Job to reset</param>
+        public static void PutReset(Job job)
+        {
+            MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
+            conn.Open();
+            string sql = String.Format("UPDATE jobs set distributed = 0, finished = 0 WHERE pk_job = '{0}'", job.pk_job);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            comm.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        /// <summary>
         /// Set Job to Finished
         /// </summary>
-        /// <param name="pk">pk of Job</param>
+        /// <param name="job">Job to finish</param>
         public static void PutFinished(Job job)
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);

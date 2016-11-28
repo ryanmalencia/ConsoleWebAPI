@@ -29,5 +29,12 @@ namespace ConsoleWebAPI.Controllers
         {
             JobInteraction.PutFinished(job);
         }
+
+        [Route("api/job/reset")]
+        [HttpPut]
+        public void PutReset(Job job)
+        {
+            JobInteraction.PutReset(job);
+        }
     }
 }
