@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataTypes;
+﻿using DataTypes;
 using Newtonsoft.Json;
 
 namespace WebAPIClient.APICalls
@@ -13,6 +8,15 @@ namespace WebAPIClient.APICalls
         public static AgentCollection GetAllAgents()
         {
             string http = "api/machine/getallmachines";
+            string method = "GET";
+            string theobject = WebAPIClient.GetResponseJson(http, null, method);
+            object collection = JsonConvert.DeserializeObject<AgentCollection>(theobject);
+            return (AgentCollection)collection;
+        }
+
+        public static AgentCollection GetIdleAgents()
+        {
+            string http = "api/machine/getidleagents";
             string method = "GET";
             string theobject = WebAPIClient.GetResponseJson(http, null, method);
             object collection = JsonConvert.DeserializeObject<AgentCollection>(theobject);

@@ -16,6 +16,13 @@ namespace ConsoleWebAPI.Controllers
             return Ok(JsonConvert.SerializeObject(AgentInteraction.Get()));
         }
 
+        [Route("api/machine/getidleagents")]
+        [HttpGet]
+        public IHttpActionResult GetIdleMachines()
+        {
+            return Ok(JsonConvert.SerializeObject(AgentInteraction.GetIdleAgents()));
+        }
+
         [Route("api/machine/getmachine/{name}")]
         [HttpGet]
         public IHttpActionResult GetOneMachine(string name)

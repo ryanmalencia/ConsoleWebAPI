@@ -32,6 +32,31 @@ namespace DBInteraction
         }
 
         /// <summary>
+        /// Get Idle Agents
+        /// </summary>
+        /// <returns>Object Array of Agents</returns>
+        public static AgentCollection GetIdleAgents()
+        {
+            AgentCollection array = new AgentCollection();
+            MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
+            conn.Open();
+            string sql = "SELECT agent_name, poolname, os_name, ip_address, running_job, sent_job,is_dead FROM agents join pools on fk_pool = pk_pool join os on fk_os = pk_os WHERE running_job = 0 AND sent_job = 0 AND is_dead = 0";
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                Agent newagent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetString(rdr.GetOrdinal("poolname")), rdr.GetString(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
+                newagent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
+                newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
+                newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
+                array.AddMachine(newagent);
+            }
+            conn.Close();
+
+            return array;
+        }
+
+        /// <summary>
         /// Get agent based on name
         /// </summary>
         /// <param name="name">Agent name</param>

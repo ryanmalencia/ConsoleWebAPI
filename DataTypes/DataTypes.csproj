@@ -43,6 +43,7 @@
     <Compile Include="Job.cs" />
     <Compile Include="Agent.cs" />
     <Compile Include="AgentCollection.cs" />
+    <Compile Include="JobCollection.cs" />
     <Compile Include="OS.cs" />
     <Compile Include="OSCollection.cs" />
     <Compile Include="Pool.cs" />

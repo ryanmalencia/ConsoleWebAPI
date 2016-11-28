@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AgentInteraction.cs" />
     <Compile Include="DBConstants.cs" />
+    <Compile Include="JobInteraction.cs" />
     <Compile Include="OSInteraction.cs" />
     <Compile Include="PoolInteraction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
