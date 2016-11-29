@@ -14,6 +14,15 @@ namespace WebAPIClient.APICalls
             return (JobCollection)collection;
         }
 
+        public static Job GetByPk(int pk)
+        {
+            string http = "api/job/getbypk/" + pk;
+            string method = "GET";
+            string theobject = WebAPIClient.GetResponseJson(http, null, method);
+            object job = JsonConvert.DeserializeObject<Job>(theobject);
+            return (Job)job;
+        }
+
         public static void SetJobDist(Job job)
         {
             string http = "api/job/setdist/";

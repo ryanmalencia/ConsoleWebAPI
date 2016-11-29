@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataTypes
+﻿namespace DataTypes
 {
     public class Job
     {
@@ -14,6 +8,9 @@ namespace DataTypes
         public int Repeat { get; set; }
         public int Distributed { get; set; }
         public int Finished { get; set; }
+        public int PrerunGroup { get; set; }
+        public int RunGroup { get; set; }
+        public int PostRunGroup { get; set; }
         //Type type { get; set; }
         //enum Type { Backup, RunProgram}
 

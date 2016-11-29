@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\JobTaskController.cs" />
     <Compile Include="Controllers\MachineController.cs" />
     <Compile Include="Controllers\OSController.cs" />
     <Compile Include="Controllers\PoolController.cs" />

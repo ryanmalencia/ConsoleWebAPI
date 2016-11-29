@@ -35,6 +35,35 @@ namespace DBInteraction
         }
 
         /// <summary>
+        /// Get Job By Pk
+        /// </summary>
+        /// <returns>Job object</returns>
+        public static Job GetJobByPk(int pk)
+        {
+            Job job = new Job();
+            MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
+            conn.Open();
+            string sql = "SELECT * FROM jobs WHERE pk_job = " + pk;
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = comm.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                job.JobName = rdr.GetString(rdr.GetOrdinal("job_name"));
+                job.pk_job = rdr.GetInt32(rdr.GetOrdinal("pk_job"));
+                job.Repeat = rdr.GetInt32(rdr.GetOrdinal("repeat"));
+                job.ExecutablePath = rdr.GetString(rdr.GetOrdinal("exe_path"));
+                job.Finished = rdr.GetInt32(rdr.GetOrdinal("finished"));
+                job.PrerunGroup = rdr.GetInt32(rdr.GetOrdinal("prerun_group"));
+                job.RunGroup = rdr.GetInt32(rdr.GetOrdinal("run_group"));
+                job.PostRunGroup = rdr.GetInt32(rdr.GetOrdinal("postrun_group"));
+            }
+
+            conn.Close();
+            return job;
+        }
+
+        /// <summary>
         /// Set Job to Dist
         /// </summary>
         /// <param name="job">Job to distribute</param>

@@ -16,6 +16,13 @@ namespace ConsoleWebAPI.Controllers
             return Ok(JsonConvert.SerializeObject(JobInteraction.Get()));
         }
 
+        [Route("api/job/getbypk/{pk}")]
+        [HttpGet]
+        public IHttpActionResult GetJobByPk(int pk)
+        {
+            return Ok(JsonConvert.SerializeObject(JobInteraction.GetJobByPk(pk)));
+        }
+
         [Route("api/job/setdist")]
         [HttpPut]
         public void PutDist(Job job)
