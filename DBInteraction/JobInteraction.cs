@@ -25,8 +25,26 @@ namespace DBInteraction
                 newjob.JobName = rdr.GetString(rdr.GetOrdinal("job_name"));
                 newjob.pk_job = rdr.GetInt32(rdr.GetOrdinal("pk_job"));
                 newjob.Repeat = rdr.GetInt32(rdr.GetOrdinal("repeat"));
-                newjob.ExecutablePath = rdr.GetString(rdr.GetOrdinal("exe_path"));
                 newjob.Finished = rdr.GetInt32(rdr.GetOrdinal("finished"));
+                newjob.PrerunGroup = rdr.GetInt32(rdr.GetOrdinal("prerun_group"));
+                newjob.RunGroup = rdr.GetInt32(rdr.GetOrdinal("run_group"));
+                newjob.PostRunGroup = rdr.GetInt32(rdr.GetOrdinal("postrun_group"));
+                if(rdr.IsDBNull(rdr.GetOrdinal("last_finished")))
+                {
+                    newjob.Last_Finished = DateTime.MinValue;
+                }
+                else
+                {
+                    newjob.Last_Finished = rdr.GetDateTime(rdr.GetOrdinal("last_finished"));
+                }
+                if (rdr.IsDBNull(rdr.GetOrdinal("last_distributed")))
+                {
+                    newjob.Last_Distributed = DateTime.MinValue;
+                }
+                else
+                {
+                    newjob.Last_Distributed = rdr.GetDateTime(rdr.GetOrdinal("last_distributed"));
+                }
                 array.AddJob(newjob);
             }
 
@@ -52,11 +70,26 @@ namespace DBInteraction
                 job.JobName = rdr.GetString(rdr.GetOrdinal("job_name"));
                 job.pk_job = rdr.GetInt32(rdr.GetOrdinal("pk_job"));
                 job.Repeat = rdr.GetInt32(rdr.GetOrdinal("repeat"));
-                job.ExecutablePath = rdr.GetString(rdr.GetOrdinal("exe_path"));
                 job.Finished = rdr.GetInt32(rdr.GetOrdinal("finished"));
                 job.PrerunGroup = rdr.GetInt32(rdr.GetOrdinal("prerun_group"));
                 job.RunGroup = rdr.GetInt32(rdr.GetOrdinal("run_group"));
                 job.PostRunGroup = rdr.GetInt32(rdr.GetOrdinal("postrun_group"));
+                if (rdr.IsDBNull(rdr.GetOrdinal("last_finished")))
+                {
+                    job.Last_Finished = DateTime.MinValue;
+                }
+                else
+                {
+                    job.Last_Finished = rdr.GetDateTime(rdr.GetOrdinal("last_finished"));
+                }
+                if (rdr.IsDBNull(rdr.GetOrdinal("last_distributed")))
+                {
+                    job.Last_Distributed = DateTime.MinValue;
+                }
+                else
+                {
+                    job.Last_Distributed = rdr.GetDateTime(rdr.GetOrdinal("last_distributed"));
+                }
             }
 
             conn.Close();
@@ -71,7 +104,7 @@ namespace DBInteraction
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE jobs set distributed = 1, finished = 0 WHERE pk_job = '{0}'", job.pk_job);
+            string sql = String.Format("UPDATE jobs set distributed = 1, finished = 0, last_distributed = NOW() WHERE pk_job = '{0}'", job.pk_job);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();
@@ -85,7 +118,7 @@ namespace DBInteraction
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE jobs set distributed = 0, finished = 0 WHERE pk_job = '{0}'", job.pk_job);
+            string sql = String.Format("UPDATE jobs set distributed = 0, finished = 0, last_finished = NULL, last_distributed = NULL WHERE pk_job = '{0}'", job.pk_job);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();
@@ -101,9 +134,9 @@ namespace DBInteraction
             conn.Open();
             string sql = "";
             if (job.Repeat == 1)
-                sql = String.Format("UPDATE jobs set distributed = 0, finished = 1 WHERE pk_job = '{0}'", job.pk_job);
+                sql = String.Format("UPDATE jobs set distributed = 0, finished = 1, last_finished = NOW() WHERE pk_job = '{0}'", job.pk_job);
             else
-                sql = String.Format("UPDATE jobs set distributed = 1, finished = 1 WHERE pk_job = '{0}'", job.pk_job);
+                sql = String.Format("UPDATE jobs set distributed = 1, finished = 1, last_finished = NOW() WHERE pk_job = '{0}'", job.pk_job);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();
