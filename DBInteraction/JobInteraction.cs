@@ -15,7 +15,7 @@ namespace DBInteraction
             JobCollection array = new JobCollection();
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = "SELECT * FROM jobs WHERE distributed = 0";
+            string sql = "SELECT * FROM jobs";
             MySqlCommand comm = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = comm.ExecuteReader();
 
@@ -25,6 +25,8 @@ namespace DBInteraction
                 newjob.JobName = rdr.GetString(rdr.GetOrdinal("job_name"));
                 newjob.pk_job = rdr.GetInt32(rdr.GetOrdinal("pk_job"));
                 newjob.Repeat = rdr.GetInt32(rdr.GetOrdinal("repeat"));
+                newjob.Started = rdr.GetInt32(rdr.GetOrdinal("started"));
+                newjob.Distributed = rdr.GetInt32(rdr.GetOrdinal("distributed"));
                 newjob.Finished = rdr.GetInt32(rdr.GetOrdinal("finished"));
                 newjob.PrerunGroup = rdr.GetInt32(rdr.GetOrdinal("prerun_group"));
                 newjob.RunGroup = rdr.GetInt32(rdr.GetOrdinal("run_group"));
@@ -69,6 +71,8 @@ namespace DBInteraction
             {
                 job.JobName = rdr.GetString(rdr.GetOrdinal("job_name"));
                 job.pk_job = rdr.GetInt32(rdr.GetOrdinal("pk_job"));
+                job.Started = rdr.GetInt32(rdr.GetOrdinal("started"));
+                job.Distributed = rdr.GetInt32(rdr.GetOrdinal("distributed"));
                 job.Repeat = rdr.GetInt32(rdr.GetOrdinal("repeat"));
                 job.Finished = rdr.GetInt32(rdr.GetOrdinal("finished"));
                 job.PrerunGroup = rdr.GetInt32(rdr.GetOrdinal("prerun_group"));
@@ -111,6 +115,20 @@ namespace DBInteraction
         }
 
         /// <summary>
+        /// Set Job to Started
+        /// </summary>
+        /// <param name="job">Job to start</param>
+        public static void PutStarted(Job job)
+        {
+            MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
+            conn.Open();
+            string sql = String.Format("UPDATE jobs set started = 1 WHERE pk_job = '{0}'", job.pk_job);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            comm.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        /// <summary>
         /// Reset job status
         /// </summary>
         /// <param name="job">Job to reset</param>
@@ -118,7 +136,7 @@ namespace DBInteraction
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE jobs set distributed = 0, finished = 0, last_finished = NULL, last_distributed = NULL WHERE pk_job = '{0}'", job.pk_job);
+            string sql = String.Format("UPDATE jobs set distributed = 0, started = 0, finished = 0, last_finished = NULL, last_distributed = NULL WHERE pk_job = '{0}'", job.pk_job);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();

@@ -30,6 +30,13 @@ namespace ConsoleWebAPI.Controllers
             JobInteraction.PutDist(job);
         }
 
+        [Route("api/job/setstarted")]
+        [HttpPut]
+        public void PutStarted(Job job)
+        {
+            JobInteraction.PutStarted(job);
+        }
+
         [Route("api/job/setfinished")]
         [HttpPut]
         public void PutFinished(Job job)

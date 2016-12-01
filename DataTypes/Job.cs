@@ -7,6 +7,7 @@ namespace DataTypes
         public string JobName { get; set; }
         public int pk_job { get; set; }
         public int Repeat { get; set; }
+        public int Started { get; set; }
         public int Distributed { get; set; }
         public int Finished { get; set; }
         public int PrerunGroup { get; set; }

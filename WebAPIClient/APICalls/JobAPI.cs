@@ -37,6 +37,13 @@ namespace WebAPIClient.APICalls
             WebAPIClient.SendResponseJson(http, job, method);
         }
 
+        public static void SetJobStarted(Job job)
+        {
+            string http = "api/job/setstarted/";
+            string method = "PUT";
+            WebAPIClient.SendResponseJson(http, job, method);
+        }
+
         public static void ResetJob(Job job)
         {
             string http = "api/job/reset/";
