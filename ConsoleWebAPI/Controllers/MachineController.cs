@@ -37,11 +37,11 @@ namespace ConsoleWebAPI.Controllers
             AgentInteraction.Add(agent);
         }
 
-        [Route("api/machine/givejob/{agent}")]
+        [Route("api/machine/givejob/{agent}/{pk_job}")]
         [HttpPut]
-        public void PutRunning(string agent)
+        public void PutRunning(string agent, int pk_job)
         {
-            AgentInteraction.SetAgentRunning(agent);
+            AgentInteraction.SetAgentRunning(agent, pk_job);
         }
 
         [Route("api/machine/setqueued/{agent}")]

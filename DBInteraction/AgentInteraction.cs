@@ -85,11 +85,11 @@ namespace DBInteraction
         /// Set agent to isrunning in database
         /// </summary>
         /// <param name="agent">Agent to set</param>
-        public static void SetAgentRunning(string agent)
+        public static void SetAgentRunning(string agent, int pk_job)
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE agents set running_job = 1, sent_job = 1 where agent_name = '{0}'", agent);
+            string sql = String.Format("UPDATE agents set running_job = 1, sent_job = 1, fk_job = {0} where agent_name = '{1}'",pk_job, agent);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();
@@ -117,7 +117,7 @@ namespace DBInteraction
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE agents set running_job = 0, sent_job = 0, is_dead = 0 where agent_name = '{0}'", agent);
+            string sql = String.Format("UPDATE agents set running_job = 0, sent_job = 0, is_dead = 0, fk_job = 0 where agent_name = '{0}'", agent);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();
@@ -136,7 +136,6 @@ namespace DBInteraction
             comm.ExecuteNonQuery();
             conn.Close();
         }
-
 
         /// <summary>
         /// Add Agent with machine object

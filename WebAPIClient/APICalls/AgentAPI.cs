@@ -32,9 +32,9 @@ namespace WebAPIClient.APICalls
             return (Agent)agent;
         }
 
-        public static void GiveAgentJob(string name)
+        public static void GiveAgentJob(string name, int pk_job)
         {
-            string http = "api/machine/givejob/" + name;
+            string http = "api/machine/givejob/" + name + "/" + pk_job;
             string method = "PUT";
             WebAPIClient.SendResponseJson(http, null, method);
         }
