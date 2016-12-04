@@ -71,5 +71,12 @@ namespace ConsoleWebAPI.Controllers
         {
             AgentInteraction.Delete(name);
         }
+
+        [Route("api/machine/updateip/")]
+        [HttpPut]
+        public void PutIP(Agent agent)
+        {
+            AgentInteraction.UpdateIP(agent);
+        }
     }
 }

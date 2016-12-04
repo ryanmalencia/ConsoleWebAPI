@@ -136,7 +136,7 @@ namespace DBInteraction
         {
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = String.Format("UPDATE jobs set distributed = 0, started = 0, finished = 0, last_finished = NULL, last_distributed = NULL WHERE pk_job = '{0}'", job.pk_job);
+            string sql = String.Format("UPDATE jobs set distributed = 0, started = 0, finished = {1} WHERE pk_job = '{0}'", job.pk_job, job.Finished);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();

@@ -9,6 +9,7 @@
         public int Sent_Job { get; set; }
         public int Running_Job { get; set; }
         public int Is_Dead { get; set; }
+        public int fk_job { get; set; }
 
         /// <summary>
         /// Constructor for machine

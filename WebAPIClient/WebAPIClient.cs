@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using Newtonsoft.Json;
 
 namespace WebAPIClient
 {
     public class WebAPIClient
     {
-        static string api_string = "http://10.0.0.57:9999/";
+        static string api_string = "http://192.168.1.152:9999/";
 
         public static string GetResponseJson(string http, object theobject, string method)
         {

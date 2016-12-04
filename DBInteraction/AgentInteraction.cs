@@ -15,7 +15,7 @@ namespace DBInteraction
             AgentCollection array = new AgentCollection();
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = "SELECT agent_name, poolname, os_name, ip_address, running_job, sent_job,is_dead FROM agents join pools on fk_pool = pk_pool join os on fk_os = pk_os";
+            string sql = "SELECT agent_name, poolname, os_name, ip_address, running_job, sent_job,is_dead, fk_job FROM agents join pools on fk_pool = pk_pool join os on fk_os = pk_os";
             MySqlCommand comm = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = comm.ExecuteReader();
             while(rdr.Read())
@@ -24,10 +24,10 @@ namespace DBInteraction
                 newagent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
                 newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
                 newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
+                newagent.fk_job = rdr.GetInt32(rdr.GetOrdinal("fk_job"));
                 array.AddMachine(newagent);
             }
             conn.Close();
-
             return array;
         }
 
@@ -52,7 +52,6 @@ namespace DBInteraction
                 array.AddMachine(newagent);
             }
             conn.Close();
-
             return array;
         }
 
@@ -77,7 +76,6 @@ namespace DBInteraction
                 agent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
             }
             conn.Close();
-
             return agent;
         }
 
@@ -172,6 +170,20 @@ namespace DBInteraction
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
             string sql = string.Format("DELETE FROM agents WHERE agent_name = '{0}'", name);
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            comm.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        /// <summary>
+        /// Update IP Address for the given agent
+        /// </summary>
+        /// <param agent="agent">Agent to update</param>
+        public static void UpdateIP(Agent agent)
+        {
+            MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
+            conn.Open();
+            string sql = string.Format("UPDATE agents SET ip_address = '{0}' WHERE agent_name = '{1}'", agent.IP, agent.Name);
             MySqlCommand comm = new MySqlCommand(sql, conn);
             comm.ExecuteNonQuery();
             conn.Close();

@@ -66,5 +66,12 @@ namespace WebAPIClient.APICalls
             string method = "PUT";
             WebAPIClient.SendResponseJson(http, agent, method);
         }
+
+        public static void UpdateIP(Agent agent)
+        {
+            string http = "api/machine/updateip";
+            string method = "PUT";
+            WebAPIClient.SendResponseJson(http, agent, method);
+        }
     }
 }
