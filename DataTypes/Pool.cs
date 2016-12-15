@@ -2,6 +2,7 @@
 {
     public class Pool
     {
+        public int PoolID { get; set; }
         public string Name { get; set; }
 
         /// <summary>

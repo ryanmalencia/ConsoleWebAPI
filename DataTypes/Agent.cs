@@ -2,6 +2,7 @@
 {
     public class Agent
     {
+        public int AgentID { get; set; }
         public string Name { get; set; }
         public string Pool { get; set; }
         public string OS { get; set; }
@@ -23,6 +24,14 @@
             Pool = pool;
             OS = os;
             IP = ip;
+        }
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Agent()
+        {
+
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ namespace DataTypes
 {
     public class Job : IComparable
     {
+        public int JobID { get; set; }
         public string JobName { get; set; }
         public int pk_job { get; set; }
         public int Repeat { get; set; }

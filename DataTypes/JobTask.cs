@@ -4,6 +4,7 @@ namespace DataTypes
 {
     public class JobTask : IComparable
     {
+        public int JobTaskID { get; set; }
         public int step { get; set; }
         public string type { get; set; }
         public string info { get; set; }
