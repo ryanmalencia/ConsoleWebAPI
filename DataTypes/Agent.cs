@@ -4,8 +4,8 @@
     {
         public int AgentID { get; set; }
         public string Name { get; set; }
-        public string Pool { get; set; }
-        public string OS { get; set; }
+        public int Pool { get; set; }
+        public int OS { get; set; }
         public string IP { get; set; }
         public int Sent_Job { get; set; }
         public int Running_Job { get; set; }
@@ -18,7 +18,7 @@
         /// <param name="name">Machine Name</param>
         /// <param name="pool">Machine Pool</param>
         /// <param name="os">Machine OS</param>
-        public Agent(string name, string pool = "Default", string os = "Unknown", string ip = "")
+        public Agent(string name, int pool = 1, int os = 1, string ip = "")
         {
             Name = name;
             Pool = pool;

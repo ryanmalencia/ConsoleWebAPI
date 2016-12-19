@@ -20,7 +20,7 @@ namespace DBInteraction
             MySqlDataReader rdr = comm.ExecuteReader();
             while(rdr.Read())
             {
-                Agent newagent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetString(rdr.GetOrdinal("poolname")), rdr.GetString(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
+                Agent newagent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetInt32(rdr.GetOrdinal("poolname")), rdr.GetInt32(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
                 newagent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
                 newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
                 newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
@@ -45,7 +45,7 @@ namespace DBInteraction
             MySqlDataReader rdr = comm.ExecuteReader();
             while (rdr.Read())
             {
-                Agent newagent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetString(rdr.GetOrdinal("poolname")), rdr.GetString(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
+                Agent newagent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetInt32(rdr.GetOrdinal("poolname")), rdr.GetInt32(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
                 newagent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
                 newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
                 newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
@@ -70,7 +70,7 @@ namespace DBInteraction
             MySqlDataReader rdr = comm.ExecuteReader();
             while (rdr.Read())
             {
-                agent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetString(rdr.GetOrdinal("poolname")), rdr.GetString(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
+                agent = new Agent(rdr.GetString(rdr.GetOrdinal("agent_name")), rdr.GetInt32(rdr.GetOrdinal("poolname")), rdr.GetInt32(rdr.GetOrdinal("os_name")), rdr.GetString(rdr.GetOrdinal("ip_address")));
                 agent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
                 agent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
                 agent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
@@ -143,22 +143,22 @@ namespace DBInteraction
         {
             if(agent.Pool == null)
             {
-                agent.Pool = "Default";
+                agent.Pool = 1;
             }
 
-            if(agent.OS == "Unknown")
+            if(agent.OS == 0)
             {
-                agent.OS = "WIN10";
+                agent.OS = 1;
             }
 
-            int mach_pool = PoolInteraction.Get(agent.Pool);
-            int mach_os = OSInteraction.GetPK(agent.OS);
+            //int mach_pool = PoolInteraction.Get(agent.Pool);
+            //int mach_os = OSInteraction.GetPK(agent.OS);
             MySqlConnection conn = new MySqlConnection(DBConstants.connstring);
             conn.Open();
-            string sql = string.Format("INSERT IGNORE INTO agents (agent_name, fk_pool, fk_os, ip_address, is_dead) VALUES ('{0}', {1}, {2}, '{3}', 1)", agent.Name, mach_pool, mach_os, agent.IP);
-            MySqlCommand comm = new MySqlCommand(sql, conn);
-            comm.ExecuteNonQuery();
-            conn.Close();
+            //string sql = string.Format("INSERT IGNORE INTO agents (agent_name, fk_pool, fk_os, ip_address, is_dead) VALUES ('{0}', {1}, {2}, '{3}', 1)", agent.Name, mach_pool, mach_os, agent.IP);
+            //MySqlCommand comm = new MySqlCommand(sql, conn);
+            //comm.ExecuteNonQuery();
+            //conn.Close();
         }
 
         /// <summary>
