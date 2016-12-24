@@ -141,7 +141,7 @@ namespace DBInteraction
         /// <param name="agent">Agent object</param>
         public static void Add(Agent agent)
         {
-            if(agent.Pool == null)
+            if(agent.Pool == 0)
             {
                 agent.Pool = 1;
             }
