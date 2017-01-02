@@ -6,6 +6,7 @@ namespace DBInteraction
 {
     public class JobInteraction
     {
+        /*
         /// <summary>
         /// Get All Jobs
         /// </summary>
@@ -159,5 +160,6 @@ namespace DBInteraction
             comm.ExecuteNonQuery();
             conn.Close();
         }
+        */
     }
 }

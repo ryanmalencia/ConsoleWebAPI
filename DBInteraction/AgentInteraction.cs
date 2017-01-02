@@ -25,7 +25,7 @@ namespace DBInteraction
                 newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
                 newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
                 newagent.fk_job = rdr.GetInt32(rdr.GetOrdinal("fk_job"));
-                array.AddMachine(newagent);
+                array.AddAgent(newagent);
             }
             conn.Close();
             return array;
@@ -49,7 +49,7 @@ namespace DBInteraction
                 newagent.Running_Job = rdr.GetInt32(rdr.GetOrdinal("running_job"));
                 newagent.Sent_Job = rdr.GetInt32(rdr.GetOrdinal("sent_job"));
                 newagent.Is_Dead = rdr.GetInt32(rdr.GetOrdinal("is_dead"));
-                array.AddMachine(newagent);
+                array.AddAgent(newagent);
             }
             conn.Close();
             return array;

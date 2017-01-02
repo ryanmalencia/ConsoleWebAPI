@@ -5,9 +5,10 @@ namespace DataTypes
     public class JobTask : IComparable
     {
         public int JobTaskID { get; set; }
-        public int step { get; set; }
-        public string type { get; set; }
-        public string info { get; set; }
+        public int Step { get; set; }
+        public int Group { get; set; }
+        public string Type { get; set; }
+        public string Info { get; set; }
 
         /// <summary>
         /// Default Constructor
@@ -30,7 +31,7 @@ namespace DataTypes
 
             if(task != null)
             {
-                return step.CompareTo(task.step);
+                return Step.CompareTo(task.Step);
             }
             else
             {

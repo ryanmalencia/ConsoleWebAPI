@@ -5,11 +5,8 @@ namespace WebAPIClient
 {
     public class WebAPIClient
     {
-#if DEBUG
         static string api_string = "http://10.0.0.57:59939/";
-#else
-        static string api_string = "http://10.0.0.57/";
-#endif
+        //static string api_string = "http://10.0.0.57:8080/";
 
         public static string GetResponseJson(string http, object theobject, string method)
         {

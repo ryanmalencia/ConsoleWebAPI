@@ -5,6 +5,7 @@ namespace DBInteraction
 {
     public class JobTaskInteraction
     {
+        /*
         /// <summary>
         /// Get JobTasks By Group Number
         /// </summary>
@@ -30,5 +31,6 @@ namespace DBInteraction
             conn.Close();
             return collection;
         }
+        */
     }
 }

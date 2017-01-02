@@ -4,23 +4,23 @@ namespace DataTypes
 {
     public class AgentCollection
     {
-        public List<Agent> machines;
+        public List<Agent> Agents;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         public AgentCollection()
         {
-            machines = new List<Agent>();
+            Agents = new List<Agent>();
         }
 
         /// <summary>
         /// Add agent to collection
         /// </summary>
         /// <param name="agent">Agent object</param>
-        public void AddMachine(Agent agent)
+        public void AddAgent(Agent agent)
         {
-            machines.Add(agent);
+            Agents.Add(agent);
         }
     }
 }

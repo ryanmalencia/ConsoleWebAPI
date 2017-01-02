@@ -6,7 +6,6 @@ namespace DataTypes
     {
         public int JobID { get; set; }
         public string JobName { get; set; }
-        public int pk_job { get; set; }
         public int Repeat { get; set; }
         public int Started { get; set; }
         public int Distributed { get; set; }
@@ -24,6 +23,11 @@ namespace DataTypes
         public Job(string jobname = "")
         {
             JobName = jobname;
+        }
+
+        public Job()
+        {
+
         }
 
         /// <summary>
