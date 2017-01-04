@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APICalls\AgentAPI.cs" />
-    <Compile Include="APICalls\JobAgentAPI.cs" />
+    <Compile Include="APICalls\JobTaskAPI.cs" />
     <Compile Include="APICalls\JobAPI.cs" />
     <Compile Include="WebAPIClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

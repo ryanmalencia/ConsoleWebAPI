@@ -18,6 +18,7 @@
         /// <param name="name">Machine Name</param>
         /// <param name="pool">Machine Pool</param>
         /// <param name="os">Machine OS</param>
+        /// <param name="ip">Machine IP</param>
         public Agent(string name, int pool = 1, int os = 1, string ip = "")
         {
             Name = name;
